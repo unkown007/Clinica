@@ -9,6 +9,7 @@ public class ClinicaDentaria {
         BufferedReader ler = new BufferedReader(
                              new InputStreamReader(System.in));
         DecimalFormat mt = new DecimalFormat("###,###,###.00 MT");
+        DecimalFormat usd = new DecimalFormat("###,###,###.00 USD");
         
         byte op;
         char opTipo, opServico;
@@ -25,7 +26,10 @@ public class ClinicaDentaria {
                   
         float valorClinicaMT, valorClinicaUSD;
         float valorPagarMT, valorPagarUSD;
+        float valorDesconto, desconto;
         
+        valorDesconto = desconto = 0;
+        valorClinicaUSD = valorPagarUSD = 0;
         valorClinicaMT = valorPagarMT = 0;
         
         int qtdRestauracao;
@@ -70,7 +74,7 @@ public class ClinicaDentaria {
                     System.out.println("N - Paciente Normal");
                     System.out.println("E - Paciente Estudante");
                     do {
-                        System.out.println("Opcao: ");
+                        System.out.print("Opcao: ");
                         opTipo = ler.readLine().charAt(0);
                         if(opTipo != 'N' && opTipo != 'E') {
                             System.out.println("Opcao Invalida");
@@ -90,12 +94,12 @@ public class ClinicaDentaria {
                     
                     System.out.println();
                     
-                    System.out.println("R - Resturacao");
+                    System.out.println("R - Restauracao");
                     System.out.println("X - Extracao");
                     System.out.println("L - Limpeza");
                     System.out.println("G - Consulta Geral");
                     do{
-                        System.out.println("Opcao: ");
+                        System.out.print("Opcao: ");
                         opServico = ler.readLine().charAt(0);
                         if(opServico != 'R' && opServico != 'X' && opServico != 'L' && opServico != 'G'){
                             System.out.println("Opcao Ivalida");
@@ -125,30 +129,54 @@ public class ClinicaDentaria {
                         break;
                     }
                     
-                    if(opTipo == 'E')
-                        valorPagarMT -= (valorPagarMT*0.15);
+                    if(opTipo == 'E') {
+                        desconto = valorPagarMT*0.15f;
+                        valorPagarMT -= desconto;
+                    }
                     
+                    valorPagarUSD = valorPagarMT/CAMBIO;
                     
+                    System.out.println("Valor a Pagar(MT): " + mt.format(valorPagarMT));
+                    System.out.println(valorPagarMT);
+                    System.out.println("Valor a Pagar(USD): " + usd.format(valorPagarUSD));
+                    
+                    valorDesconto += desconto;
+                    valorClinicaMT += valorPagarMT;
+                    valorClinicaUSD += valorPagarUSD;
                 break;
                 case 2:
                     
                 break;
                 case 3:
-                    
+                    System.out.println("Valor da Clinica(MT): " + mt.format(valorClinicaMT));
                 break;
                 case 4:
-                    
+                    System.out.println("Valor da Clinica(USD): " + usd.format(valorClinicaUSD));
                 break;
                 case 5:
-                    
+                    System.out.println("Valor de Desconto(MT): " + mt.format(valorDesconto));
                 break;
                 case 6:
-                    
+                    System.out.println("Pacientes Normais: " + qtdNormal);
+                    System.out.println("Pacientes Estudantes: " + qtdEstudante);
                 break;
                 case 7:
-                    
+                    if((qtdRestauracao > qtdExtracao) && (qtdRestauracao > qtdLimpeza) && (qtdRestauracao > qtdConsulta)) {
+                        System.out.println("O servico mais solicitado e de Restauracao: " + qtdRestauracao + " Pacientes");
+                    }else{
+                        if((qtdExtracao > qtdRestauracao) && (qtdExtracao > qtdLimpeza) && (qtdExtracao > qtdConsulta)) {
+                            System.out.println("O servico mais solicitado e de Extracao: " + qtdExtracao + " Pacientes");
+                        }else{
+                            if((qtdLimpeza > qtdRestauracao) && (qtdLimpeza > qtdExtracao) && (qtdLimpeza > qtdConsulta)) {
+                                System.out.println("O servico mais solicitado e de Limpeza: " + qtdLimpeza + " Pacientes");
+                            }else
+                                System.out.println("O servico mais solicitado e de Consulta Geral: " + qtdConsulta + " Pacientes");
+                        }
+                    }
                 break;
             }
+            System.out.println();
+            System.out.println();
         }while(op != 0);
     }
     
