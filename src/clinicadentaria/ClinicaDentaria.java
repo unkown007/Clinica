@@ -140,9 +140,6 @@ public class ClinicaDentaria {
                     
                     valorPagarUSD = valorPagarMT/CAMBIO;
                     
-                    System.out.println("Valor a Pagar(MT): " + mt.format(valorPagarMT));
-                    System.out.println("Valor a Pagar(USD): " + usd.format(valorPagarUSD));
-                    
                     valorDesconto += desconto;
                     valorClinicaMT += valorPagarMT;
                     valorClinicaUSD += valorPagarUSD;
