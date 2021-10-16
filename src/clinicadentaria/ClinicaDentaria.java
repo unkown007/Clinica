@@ -14,9 +14,12 @@ public class ClinicaDentaria {
         byte op;
         char opTipo, opServico;
         
-        int cod;
+        int cod = 0;
         String tipo;
         String servico;
+        
+        cod = 0;
+        tipo = servico = "";
         
         final int RESTAURACAO = 14000;
         final int EXTRACAO    = 8000;
@@ -137,7 +140,6 @@ public class ClinicaDentaria {
                     valorPagarUSD = valorPagarMT/CAMBIO;
                     
                     System.out.println("Valor a Pagar(MT): " + mt.format(valorPagarMT));
-                    System.out.println(valorPagarMT);
                     System.out.println("Valor a Pagar(USD): " + usd.format(valorPagarUSD));
                     
                     valorDesconto += desconto;
@@ -145,7 +147,17 @@ public class ClinicaDentaria {
                     valorClinicaUSD += valorPagarUSD;
                 break;
                 case 2:
-                    
+                    System.out.printf("\n%8s%10s%10s%s%s\n", " ==============","===========","==========================",
+                            "=========================","============================");
+                    System.out.printf("%-10s%-25s%-25s%-22s%-20s  |\n", "| Codigo","| Tipo","| Servico","| Valor a pagar (MT)",
+                            "| Valor a pagar (USD)");
+                    System.out.printf("%8s%10s%10s%s%s\n", " ==============","===========","=============================",
+                            "======================","============================");
+                    System.out.printf("| %-7d%-4s%-18s%5s%14s%11s%20s%s%21s |\n", cod, " |", tipo, " |", servico,
+                                    " |", mt.format(valorClinicaMT), " |", usd.format(valorClinicaUSD));
+                    System.out.printf("%8s%10s%10s%s%s\n", " ==============","===========","==========================",
+                            "=========================","============================");
+                    System.out.println("\n");
                 break;
                 case 3:
                     System.out.println("Valor da Clinica(MT): " + mt.format(valorClinicaMT));
