@@ -22,18 +22,23 @@ public class ClinicaDentaria {
         final int LIMPEZA     = 7000;
         final int CONSULTA    = 2000;
         final short CAMBIO    = 65;
-        
+                  
         float valorClinicaMT, valorClinicaUSD;
         float valorPagarMT, valorPagarUSD;
         
-        float qtdRestauracao;
-        float qtdExtracao;
-        float qtdLimpeza;
-        float qtdConsulta;
+        valorClinicaMT = valorPagarMT = 0;
+        
+        int qtdRestauracao;
+        int qtdExtracao;
+        int qtdLimpeza;
+        int qtdConsulta;
+        
+        int qtdNormal, qtdEstudante;
+        
         
         qtdRestauracao = qtdExtracao = qtdLimpeza = qtdConsulta = 0;
         
-        
+        qtdNormal = qtdEstudante = 0;
         
         do {
             System.out.println("1. Receber dados");
@@ -71,6 +76,57 @@ public class ClinicaDentaria {
                             System.out.println("Opcao Invalida");
                         }
                     }while(opTipo != 'N' && opTipo != 'E');
+                    
+                    switch(opTipo){
+                        case 'N': 
+                            tipo = "Paciente Normal";
+                            qtdNormal++;
+                        break;
+                        case 'E':
+                            tipo = "Paciente Estudante";
+                            qtdEstudante++;
+                        break;
+                    }
+                    
+                    System.out.println();
+                    
+                    System.out.println("R - Resturacao");
+                    System.out.println("X - Extracao");
+                    System.out.println("L - Limpeza");
+                    System.out.println("G - Consulta Geral");
+                    do{
+                        System.out.println("Opcao: ");
+                        opServico = ler.readLine().charAt(0);
+                        if(opServico != 'R' && opServico != 'X' && opServico != 'L' && opServico != 'G'){
+                            System.out.println("Opcao Ivalida");
+                        }
+                    }while(opServico != 'R' && opServico != 'X' && opServico != 'L' && opServico != 'G');
+                    
+                    switch(opServico) {
+                        case 'R':
+                            servico = "Restauracao";
+                            qtdRestauracao++;
+                            valorPagarMT = RESTAURACAO;
+                        break;
+                        case 'X':
+                            servico = "Extracao";
+                            qtdExtracao++;
+                            valorPagarMT = EXTRACAO;
+                        break;
+                        case 'L':
+                            servico = "Limpeza";
+                            qtdLimpeza++;
+                            valorPagarMT = LIMPEZA;
+                        break;
+                        case 'G':
+                            servico = "Consulta Geral";
+                            qtdConsulta++;
+                            valorPagarMT = CONSULTA;
+                        break;
+                    }
+                    
+                    if(opTipo == 'E')
+                        valorPagarMT -= (valorPagarMT*0.15);
                     
                     
                 break;
