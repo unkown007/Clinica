@@ -49,20 +49,21 @@ public class ClinicaDentaria {
         
         do {
             System.out.println("1. Receber dados");
-            System.out.println("2. Visualizar dados");
-            System.out.println("3. Valor total recebido da clinica");
-            System.out.println("4. Valor total recebido da clinica em USD");
-            System.out.println("5. Valor total do desconto");
-            System.out.println("6. Quantidade de pacientes por cada tipo");
-            System.out.println("7. Visualizar o servico mais aderido");
+            System.out.println("2. Valor a pagar");
+            System.out.println("3. Visualizar dados");
+            System.out.println("4. Valor total recebido da clinica");
+            System.out.println("5. Valor total recebido da clinica em USD");
+            System.out.println("6. Valor total do desconto");
+            System.out.println("7. Quantidade de pacientes por cada tipo");
+            System.out.println("8. Visualizar o servico mais aderido");
             System.out.println("0. Sair");
             do{
                 System.out.print("Opcao: ");
                 op = Byte.parseByte(ler.readLine());
-                if(op > 7 || op < 0) {
+                if(op > 8 || op < 0) {
                     System.out.println("Opcao invalida");
                 }
-            }while(op > 7 || op < 0);
+            }while(op > 8 || op < 0);
             
             switch(op) {
                 case 1:
@@ -147,6 +148,10 @@ public class ClinicaDentaria {
                     valorClinicaUSD += valorPagarUSD;
                 break;
                 case 2:
+                    System.out.println("Valor a Pagar(MT): " + mt.format(valorPagarMT));
+                    System.out.println("Valor a Pagar(USD): " + usd.format(valorPagarUSD));
+                break;
+                case 3:
                     System.out.printf("\n%8s%10s%10s%s%s\n", " ==============","===========","==========================",
                             "=========================","============================");
                     System.out.printf("%-10s%-25s%-25s%-22s%-20s  |\n", "| Codigo","| Tipo","| Servico","| Valor a pagar (MT)",
@@ -159,20 +164,20 @@ public class ClinicaDentaria {
                             "=========================","============================");
                     System.out.println("\n");
                 break;
-                case 3:
+                case 4:
                     System.out.println("Valor da Clinica(MT): " + mt.format(valorClinicaMT));
                 break;
-                case 4:
+                case 5:
                     System.out.println("Valor da Clinica(USD): " + usd.format(valorClinicaUSD));
                 break;
-                case 5:
+                case 6:
                     System.out.println("Valor de Desconto(MT): " + mt.format(valorDesconto));
                 break;
-                case 6:
+                case 7:
                     System.out.println("Pacientes Normais: " + qtdNormal);
                     System.out.println("Pacientes Estudantes: " + qtdEstudante);
                 break;
-                case 7:
+                case 8:
                     if((qtdRestauracao > qtdExtracao) && (qtdRestauracao > qtdLimpeza) && (qtdRestauracao > qtdConsulta)) {
                         System.out.println("O servico mais solicitado e de Restauracao: " + qtdRestauracao + " Pacientes");
                     }else{
